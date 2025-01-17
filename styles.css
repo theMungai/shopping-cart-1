@@ -29,6 +29,14 @@ body{
     gap: 2rem;
 }
 
+.product-grid-cell{
+    width: 250px;
+}
+
+.image-container img{
+    width: 100%;
+}
+
 .cart-container{
     width: 30%;
 }
