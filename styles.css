@@ -39,6 +39,7 @@ body{
 }
 
 .cart-container{
+    padding: 20px;
     width: 30%;
     border: 2px solid;
 }
