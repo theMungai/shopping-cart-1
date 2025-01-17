@@ -37,14 +37,12 @@ const addToCartButtons = document.querySelectorAll(".js-add-to-cart-btn");
 addToCartButtons.forEach((addButton) => {
     addButton.addEventListener("click", () => {
         const productName = addButton.dataset.productName;
-        const productPrice = addButton.dataset.productPrice;
+        const productPrice = parseFloat(addButton.dataset.productPrice);
 
-        const existingProduct = cart.find(item => item.name === productName); 
-
+        const existingProduct = cart.find((product) => product.name === productName); 
         if(existingProduct){
-            existingProduct.quantity += 1
-        }
-        else{
+            existingProduct.quantity += 1;
+        }else{
             cart.push({
                 name : productName,
                 price : productPrice,
@@ -61,6 +59,7 @@ function updateCart(){
 
     let totalAmount = 0;
 
+    cartContainer.innerHTML = ""
     cart.forEach((item) => {
         let cartHTML = `
             <div class="cart-added-items">
@@ -70,7 +69,7 @@ function updateCart(){
                     </div>
                     <div class="quantity-and-price">
                         <div class="item-quantity">${item.quantity}x</div>
-                        <div class="price-per-item">@$${item.price}</div>
+                        <div class="price-per-item">@$${(item.price * 1).toFixed(2)}</div>
                         <div class="product-of-price-and-quantity">$${(item.quantity * item.price).toFixed(2)}</div>
                     </div>
                 </div>
@@ -79,9 +78,7 @@ function updateCart(){
                     <img src="/assets/images/icon-remove-item.svg" alt="">
                 </button>
             </div>
-            <div class="confirm-order">
-                    <button class="confirm-order-btn">Confirm Order</button>
-                </div>
+            
         `;
 
         cartContainer.innerHTML += cartHTML
@@ -89,14 +86,16 @@ function updateCart(){
     })
 
     
-    cartQuantity.textContent = cart.length
+    cartQuantity.textContent = cart.reduce((acc, item) => item.quantity + acc, 0)
 
     const totalHTML = `
         <div class="total">
             <p>Total</p>
             <h1>$${totalAmount.toFixed(2)}</h1>
         </div>
-        
+        <div class="confirm-order">
+            <button class="confirm-order-btn">Confirm Order</button>
+        </div>
     `;
     
     cartContainer.innerHTML += totalHTML;
