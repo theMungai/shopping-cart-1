@@ -89,13 +89,18 @@ function updateCart(){
     cartQuantity.textContent = cart.reduce((acc, item) => item.quantity + acc, 0)
 
     const totalHTML = `
-        <div class="total">
-            <p>Total</p>
+        <div class="cart-total">
+            <p>Order Total</p>
             <h1>$${totalAmount.toFixed(2)}</h1>
+        </div>
+        <div class="carbon-neutral">
+            <img src="/assets/images/icon-carbon-neutral.svg" alt="">
+            <p>This is a carbon-neutral delivery.</p>
         </div>
         <div class="confirm-order">
             <button class="confirm-order-btn">Confirm Order</button>
         </div>
+
     `;
     
     cartContainer.innerHTML += totalHTML;
