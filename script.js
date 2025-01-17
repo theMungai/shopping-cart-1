@@ -56,7 +56,7 @@ addToCartButtons.forEach((addButton) => {
 function updateCart(){
     const cartContainer = document.querySelector(".cart-with-added-items");
     const cartQuantity = document.querySelector(".js-cart-quantity");
-
+    const emptyCart = document.querySelector(".empty-cart")
     let totalAmount = 0;
 
     cartContainer.innerHTML = ""
@@ -100,4 +100,12 @@ function updateCart(){
     
     cartContainer.innerHTML += totalHTML;
 
+    if(cart.length <= 0){
+        emptyCart.style.display = "block";
+        cartContainer.style.display = "none";
+    }
+    else{
+        emptyCart.style.display = "none";
+        cartContainer.style.display = "block"
+    }
 }
